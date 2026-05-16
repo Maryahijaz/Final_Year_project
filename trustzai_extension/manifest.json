@@ -1,0 +1,18 @@
+{
+  "dxt_version": "0.1",
+  "name": "trustzai-cybersec",
+  "display_name": "TrustZAI CyberSec",
+  "version": "1.0.0",
+  "description": "Zero Trust AI Security Agent",
+  "author": {
+    "name": "TrustZAI"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "server.py",
+    "mcp_config": {
+      "command": "${__dirname}/venv/bin/python3",
+      "args": ["${__dirname}/server.py"]
+    }
+  }
+}
