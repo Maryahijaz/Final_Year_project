@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustZAI — CyberSec AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="nav-logo">🛡️ TrustZAI</span>
+            <span class="nav-subtitle">CyberSec AI Agent</span>
+        </div>
+        <div class="nav-right">
+            <span class="nav-user">
+                👤 {{ username }}
+                <span class="role-badge {{ role }}">{{ role }}</span>
+            </span>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="chat-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Quick Queries</h3>
+            <div class="quick-btns">
+                <button onclick="quickQuery('What are the most critical CVEs in 2024?')">
+                    🔴 Critical CVEs 2024
+                </button>
+                <button onclick="quickQuery('Explain SQL injection vulnerabilities')">
+                    💉 SQL Injection
+                </button>
+                <button onclick="quickQuery('What is remote code execution?')">
+                    💻 RCE Vulnerabilities
+                </button>
+                <button onclick="quickQuery('How to defend against privilege escalation?')">
+                    ⬆️ Privilege Escalation
+                </button>
+                <button onclick="quickQuery('What are XSS attack techniques?')">
+                    🌐 XSS Attacks
+                </button>
+                <button onclick="quickQuery('Explain buffer overflow attacks')">
+                    📦 Buffer Overflow
+                </button>
+            </div>
+
+            <div class="sidebar-info">
+                <h3>System Status</h3>
+                <div class="status-item">
+                    <span class="status-dot green"></span>
+                    TrustZAI API
+                </div>
+                <div class="status-item">
+                    <span class="status-dot green"></span>
+                    Ollama LLM
+                </div>
+                <div class="status-item">
+                    <span class="status-dot green"></span>
+                    ChromaDB RAG
+                </div>
+                <div class="status-item">
+                    <span class="status-dot green"></span>
+                    Zero Trust Layer
+                </div>
+            </div>
+
+            <div class="sidebar-info">
+                <h3>📊 Monitoring Stats</h3>
+                <div id="mcpStats" class="mcp-stats">
+                    <div class="stat-row">
+                        <span>Total Requests</span>
+                        <span id="mcpTotal" class="stat-num">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Blocked</span>
+                        <span id="mcpBlocked" class="stat-num red">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Attacks</span>
+                        <span id="mcpAttacks" class="stat-num yellow">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Success Rate</span>
+                        <span id="mcpSuccess" class="stat-num green">-</span>
+                    </div>
+                    <button onclick="refreshStats()" class="btn-refresh">🔄 Refresh</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Chat -->
+        <div class="chat-main">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system">
+                    <div class="message-content">
+                        👋 Welcome <strong>{{ username }}</strong>!
+                        You are logged in as <strong class="{{ role }}">{{ role }}</strong>.
+                        <br><br>
+                        I am your <strong>CyberSec AI Assistant</strong> powered by TrustZAI.
+                        Ask me anything about CVEs, vulnerabilities, or security threats.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <textarea
+                        id="promptInput"
+                        placeholder="Ask about CVEs, vulnerabilities, threats..."
+                        rows="1"
+                        onkeydown="handleKey(event)"
+                    ></textarea>
+                    <button onclick="sendMessage()" id="sendBtn">
+                        ➤
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span>🔒 Protected by TrustZAI Zero Trust</span>
+                    <span id="charCount">0 / 2000</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
