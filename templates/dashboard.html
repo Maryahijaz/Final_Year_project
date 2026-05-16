@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustZAI Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <span class="logo">📊 TrustZAI Monitoring</span>
+        <span class="subtitle">Mistral Security Analyzer</span>
+    </div>
+    <div class="nav-right">
+        <span class="user-info">👤 {{ username }} <span class="role-badge">{{ role }}</span></span>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <a href="/logout" class="btn-logout">Logout</a>
+    </div>
+</nav>
+
+<div class="main">
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div>
+                <div class="stat-value" id="totalRequests">-</div>
+                <div class="stat-label">Total Requests</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🚨</div>
+            <div>
+                <div class="stat-value red" id="totalBlocked">-</div>
+                <div class="stat-label">Blocked</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⚔️</div>
+            <div>
+                <div class="stat-value yellow" id="totalEvents">-</div>
+                <div class="stat-label">Security Events</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div>
+                <div class="stat-value green" id="successRate">-</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <!-- Attack Types -->
+        <div class="card">
+            <h2>⚔️ Attack Types</h2>
+            <div id="attackTypes"></div>
+        </div>
+
+        <!-- User Activity -->
+        <div class="card">
+            <h2>👤 User Activity</h2>
+            <div id="userActivity"></div>
+        </div>
+    </div>
+
+    <!-- Logs -->
+    <div class="card">
+        <div class="card-header">
+            <h2>📋 Security Logs</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="loadLogs('main', this)">All</button>
+                <button class="tab" onclick="loadLogs('security', this)">Security</button>
+                <button class="tab" onclick="loadLogs('blocked', this)">Blocked</button>
+            </div>
+        </div>
+        <div id="logsContainer" class="logs-container"></div>
+    </div>
+
+    <!-- AI Analysis -->
+    <div class="card">
+        <h2>🤖 Mistral Security Analysis</h2>
+        <p class="card-desc">Independent AI analysis powered by Mistral</p>
+
+        <div class="analysis-input">
+            <input
+                type="text"
+                id="question"
+                value="Analyze the security logs and provide a full security report"
+                placeholder="Ask about security events..."
+            />
+            <button onclick="runAnalysis()" id="analyzeBtn">🔍 Analyze</button>
+        </div>
+
+        <div id="loading" style="display:none" class="loading">
+            <div class="spinner"></div>
+            <span>Mistral is analyzing logs...</span>
+        </div>
+
+        <div id="result" style="display:none" class="result-box">
+            <div class="result-header">
+                <span>🛡️ Mistral Analysis Report</span>
+                <span id="resultTime"></span>
+            </div>
+            <div id="resultContent" class="result-content"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
